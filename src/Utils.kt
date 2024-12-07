@@ -7,6 +7,9 @@ import kotlin.io.path.readText
  * Reads lines from the given input txt file.
  */
 fun readInput(name: String) = Path("src/$name.txt").readText().trim().lines()
+fun toMatrix(input: MutableList<String>) = input.map { it.split("").drop(1).dropLast(1).toMutableList()}
+fun readInputRaw(name: String) = Path("src/$name.txt").readText().trim()
+
 
 /**
  * Converts string to md5 hash.

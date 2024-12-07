@@ -1,21 +1,9 @@
+import kotlin.collections.sorted
+
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
-    }
-
-    fun part2(input: List<String>): Int {
-        return input.size
-    }
-
-    // Test if implementation meets criteria from the description, like:
-    check(part1(listOf("test_input")) == 1)
-
-    // Or read a large test input from the `src/Day01_test.txt` file:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
-
-    // Read the input from the `src/Day01.txt` file.
-    val input = readInput("Day01")
-    part1(input).println()
-    part2(input).println()
+    val mappedValues = readInput("Day01").flatMap { it.split("\\s+".toRegex()) }.withIndex().groupBy { it.index % 2 }.map { it.value.map { it.value.toLong() } }
+    val l1 = mappedValues[0].sorted()
+    val l2 = mappedValues[1].sorted()
+    println("part1 ${l1.mapIndexed{ i, e -> kotlin.math.abs(l1[i] - l2[i]) }.sum()}")
+    println("part2 ${l1.sumOf { it * l2.filter { s -> s == it }.size }}")
 }
